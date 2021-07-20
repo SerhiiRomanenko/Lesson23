@@ -32,45 +32,23 @@ const accordionData = [
 ];
 
 $(accordionData).map((index, item) => {
+    const $wrap = $('<div>');
+    $('#section').append($wrap);
+
     const $title = $('<h2>');
-    $title.text(item.title).css('text-align', 'center');
-    $('#section').append($title);
+    $title.text(item.title);
+    $($wrap).append($title);
 
     const $info = $('<p>');
     $info.text(item.content);
-    $('#section').append($info);
+    $($wrap).append($info);
     $info.hide();
-
-    //------------------STYLE--------------//
-    $info.css({
-        'text-align': 'justify',
-        'padding': '0 50px',
-    });
-    $title.css({
-        'border-bottom': '2px solid rgb(193, 209, 217',
-        'cursor': 'pointer',
-    });
-
-    // console.log($info.html());
-
-    $title.on('click', () => {
-        // console.log($info.text());
-
-        if ($info.slideUp()) {
-            $info.slideDown();
-        }
-    });
 });
 
-//--------------------STYLES IN JQUERY-------------------//
-
-$('body').css('background-color', '#BBCBD8');
-
-$('section').css({
-    'font-size': '15px',
-    'background-color': 'white',
-    'width': '400px',
-    'margin': '0 auto',
-    'padding-top': '1px',
-    'color': '#6F7A82',
+$('div').map((i, item) => {
+    $(item).on('click', () => {
+        $('p').slideUp();
+        const target = $(item).find('p');
+        $(target).slideDown();
+    });
 });
